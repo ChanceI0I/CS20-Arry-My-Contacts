@@ -25,6 +25,8 @@ function goBtnHandler() {
   }
 }
 
+let Contact = [];
+
 // MENU FUNCTIONS
 function displayContacts() {
   console.log('Display Contacts');
@@ -32,6 +34,11 @@ function displayContacts() {
 
 function addContact() {
   console.log('Add Contact');
+  let newContact = {};
+  newContact.push((prompt("Name")));
+  newContact.push((prompt("Email")));
+  newContact.push((prompt("Phone")));
+  console.log(newContact)
 }
 
 function removeContact() {
