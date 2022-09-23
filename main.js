@@ -25,20 +25,25 @@ function goBtnHandler() {
   }
 }
 
-let Contact = [];
+let Contact = loadContact();
 
 // MENU FUNCTIONS
 function displayContacts() {
   console.log('Display Contacts');
+  displayall()
 }
 
 function addContact() {
   console.log('Add Contact');
-  let newContact = {};
-  newContact.push((prompt("Name")));
-  newContact.push((prompt("Email")));
-  newContact.push((prompt("Phone")));
-  console.log(newContact)
+
+  let newName = (prompt("Name"));
+  let newEmail = (prompt("Email"));
+  let newNumber = (prompt("Phone"));
+  let newCountry = (prompt("Country"));
+
+  Contact.push(newContack(newName, newEmail, newNumber, newCountry))
+  console.log(Contact);
+  saveContact()
 }
 
 function removeContact() {
@@ -51,4 +56,44 @@ function displayByName() {
 
 function displayByCountry() {
   console.log('Display by Country');
+}
+
+function newContack(contactName, contactEmail, contactNumber, contactCountry) {
+  return {
+    name: contactName,
+    email: contactEmail,
+    number: contactNumber,
+    country: contactCountry,
+    delete: false
+  };
+}
+
+function displayall() {
+  let contactinfo = "";
+  for (let i = 0; i < Contact.length; i++) {
+    contactinfo += getinfo(Contact[i], i)
+  }
+  outputEl.innerHTML = contactinfo;
+}
+
+function getinfo(contact, i) {
+  console.log(Contact[i])
+  console.log(contact.name, i)
+  return `
+    <div class="contact">
+    <b>${i}: ${contact.name}</b>
+    <br>
+    ${contact.email} 
+    <br>
+    ${contact.number}(${contact.country})
+    </div>`
+}
+
+function saveContact() {
+  localStorage.setItem("contact", JSON.stringify(Contact));
+}
+
+function loadContact() {
+  let Contactinfo = localStorage.getItem("contact")
+  return JSON.parse(Contactinfo);
 }
